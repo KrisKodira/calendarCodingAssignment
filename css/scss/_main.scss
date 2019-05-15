@@ -1,0 +1,168 @@
+//Colors
+$primary: #77cbe7;
+$white: #fff;
+$lightgray: #eeeeee;
+$lightFont: #afafaf;
+$black: #000;
+
+//Misc vars
+$animSpeed: 150ms;
+$animEase: ease-in-out;
+
+//Mixins
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+}
+
+
+
+// -------- SCSS --------
+//Base
+*{
+    background-repeat: no-repeat;
+    @include transition(background-color $animSpeed $animEase, color $animSpeed $animEase, fill $animSpeed $animEase);
+}
+
+div{
+    display: inline-block;
+}
+
+body{
+    margin: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: $lightgray;
+}
+
+.button{
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: $lightFont;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-left: 10px;
+
+    &:hover, &.highlighted{
+        background-color: $primary;
+        color: $white;
+    }
+
+    &.highlighted:hover{
+        background-color: darken($primary, 20%);
+    }
+}
+
+
+
+//Specific
+.calendar{
+    -webkit-box-shadow: 0px 0px 14px -7px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 14px -7px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 14px -7px rgba(0,0,0,0.75);
+    background-color: $white;
+    display: inline-flex;
+    flex-direction: column;
+    width: auto;
+    padding: 20px;
+    height: auto;
+    width: 320px;
+    border-radius: 5px;
+
+    .month-wrap{
+        display: flex;
+        align-self: center;
+        margin-bottom: 20px;
+
+        .arrow{
+            cursor: pointer;
+
+            svg{
+                width: 1.5em;
+                height: 1.5em;
+                fill: $lightFont;
+            }
+
+            &:hover{
+
+                svg{
+                    fill: $black;
+                }
+            }
+            
+        }
+
+        .month-title{
+            font-size: 1.5em;
+            margin: 0 10px 0 10px;
+        }
+    }
+
+    .week-wrap{
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 10px;
+
+        span{
+            flex-basis: 14.28%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .weekend{
+            color: $lightFont;
+        }
+    }
+
+    .day-wrap{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        position: relative;
+
+        .other-month, .day{
+            flex-basis: 14.28%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 40px;
+            cursor: pointer;
+            position: relative;
+
+            &.today span, &:hover span{
+                background-color: $primary;
+                width: 40px;
+                height: 40px;
+                margin: 0 auto;
+                position: absolute;
+                z-index: 1;
+                color: $white;
+            }
+
+            span{
+                z-index: 2;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+            }
+        }
+
+        .other-month{
+            color: $lightFont;
+        }
+    }
+
+    .button-wrap{
+        align-self: flex-end;
+        margin-top: 40px;
+    }
+}
+
